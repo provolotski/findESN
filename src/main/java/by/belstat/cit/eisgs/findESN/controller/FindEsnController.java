@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 
 @RequestMapping("/v1")
@@ -21,4 +23,11 @@ public class FindEsnController {
     public Esn checkProtocolReady(@PathVariable String esnId, Model model){
         return findESNService.findById(esnId);
     }
+
+    @GetMapping(value = "/showAll")
+    public List<Esn> showAllEsn(Model model){
+        return findESNService.findAll();
+    }
+
+
 }

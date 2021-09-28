@@ -2,4 +2,4 @@
 target/protocol/WEB-INF/lib
 target
 /src/main/resources/db.properties
-/src/main/resources/log4j2.xml
+/logs/*.log

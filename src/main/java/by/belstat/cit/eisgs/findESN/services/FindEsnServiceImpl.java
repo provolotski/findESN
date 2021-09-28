@@ -6,6 +6,8 @@ import by.belstat.cit.eisgs.findESN.entity.Esn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class FindEsnServiceImpl implements FindESNService {
     @Autowired
@@ -14,5 +16,10 @@ public class FindEsnServiceImpl implements FindESNService {
     @Override
     public Esn findById(String id) {
         return findEsnDAO.findById(id);
+    }
+
+    @Override
+    public List<Esn> findAll() {
+        return findEsnDAO.findAll();
     }
 }
