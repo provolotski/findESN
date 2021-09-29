@@ -18,6 +18,7 @@
         </Console>
     </Appenders>
     <Loggers>
+        <logger name = "by.belstat.cit.eisgs.findESN" level="trace" additivity="true" />
         <Root level="info" additivity="false">
             <appender-ref ref="console"/>
             <appender-ref ref="fileLogger"/>

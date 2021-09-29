@@ -20,12 +20,12 @@ public class FindEsnController {
     private FindESNService findESNService;
 
     @GetMapping("/findESN/{esnId}")
-    public Esn checkProtocolReady(@PathVariable String esnId, Model model){
+    public Esn checkProtocolReady(@PathVariable String esnId, Model model) {
         return findESNService.findById(esnId);
     }
 
     @GetMapping(value = "/showAll")
-    public List<Esn> showAllEsn(Model model){
+    public List<Esn> showAllEsn(Model model) {
         return findESNService.findAll();
     }
 
