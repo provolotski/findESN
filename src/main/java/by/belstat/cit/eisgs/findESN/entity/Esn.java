@@ -1,8 +1,11 @@
 package by.belstat.cit.eisgs.findESN.entity;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
+import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.io.Serializable;
+
+
+@Document(indexName = "esn")
 public class Esn implements Serializable {
     private Long id;
     private String codeEsni;

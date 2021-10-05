@@ -23,7 +23,7 @@ public class FindEsnDaoImpl implements FindEsnDAO {
         LOGGER.info("start findById");
         Esn esn = new Esn();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLQueryText.qryfindESNById);) {
+             PreparedStatement statement = connection.prepareStatement(SQLQueryText.QRYFIND_ESN_BY_ID);) {
             statement.setString(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -48,7 +48,7 @@ public class FindEsnDaoImpl implements FindEsnDAO {
         List<Esn> esnList = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SQLQueryText.qryfindESNAll);
+             ResultSet resultSet = statement.executeQuery(SQLQueryText.QRYFIND_ESN_ALL);
 
         ) {
             LOGGER.debug("generate repository");
@@ -60,14 +60,54 @@ public class FindEsnDaoImpl implements FindEsnDAO {
                         resultSet.getString("CODE_ESNI_UNP"),
                         resultSet.getInt("ID_ESNT"),
                         resultSet.getString("VARC_DATA")));
-                if (i++%1000 ==0 ){
-                    LOGGER.debug("added esn count: "+ i);
+                if (i++ % 10000 == 0) {
+                    LOGGER.debug("added esn count: " + i);
                 }
             }
-            LOGGER.info("finish generate repository");
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
         return esnList;
     }
+
+    @Override
+    public List<Esn> findAllPaginator(long start, long finish) {
+        List<Esn> esnList = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLQueryText.QRY_FIND_ALL_BY_PAGE);) {
+            statement.setLong(1, start);
+            statement.setLong(2, finish);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    esnList.add(new Esn(
+                            resultSet.getLong("ID_ESNI"),
+                            resultSet.getString("CODE_ESNI"),
+                            resultSet.getString("CODE_ESNI_UNP"),
+                            resultSet.getInt("ID_ESNT"),
+                            resultSet.getString("VARC_DATA")));
+                }
+            }
+        } catch (SQLException exception) {
+            LOGGER.error("Ошибка при получении предприятия ");
+            exception.printStackTrace();
+        }
+        return esnList;
+    }
+
+    @Override
+    public long count() {
+        long count = 0;
+
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(SQLQueryText.QRY_CONT_ESNI);) {
+            if (resultSet.next()) {
+                count = resultSet.getLong("cnt");
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return count;
+    }
+
 }

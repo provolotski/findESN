@@ -12,7 +12,7 @@ import org.springframework.core.io.Resource;
 import java.io.IOException;
 
 @Configuration
-@ComponentScan({"by.belstat.cit.eisgs.findESN.services",
+@ComponentScan({"by.belstat.cit.eisgs.findESN.services","by.belstat.cit.eisgs.findESN.repository",
 "by.belstat.cit.eisgs.findESN.dao"})
 public class ServiceConfig {
     private static final Logger LOGGER = LogManager.getLogger(ServiceConfig.class);

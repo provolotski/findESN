@@ -22,4 +22,14 @@ public class FindEsnServiceImpl implements FindESNService {
     public List<Esn> findAll() {
         return findEsnDAO.findAll();
     }
+
+    @Override
+    public List<Esn> findAllPaginator(long start, long finish) {
+        return findEsnDAO.findAllPaginator(start,finish);
+    }
+
+    @Override
+    public long count() {
+        return findEsnDAO.count();
+    }
 }

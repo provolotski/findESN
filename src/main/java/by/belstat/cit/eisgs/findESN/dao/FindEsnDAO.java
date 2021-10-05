@@ -7,4 +7,7 @@ import java.util.List;
 public interface FindEsnDAO {
     Esn findById(String id);
     List<Esn> findAll();
+    List<Esn> findAllPaginator(long start, long finish);
+    long count();
+
 }
